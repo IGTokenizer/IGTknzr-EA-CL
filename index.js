@@ -7,29 +7,33 @@ const customError = (data) => {
   return false
 }
 
-// Define custom parameters to be used by the adapter.
-// Extra parameters can be stated in the extra object,
-// with a Boolean value indicating whether or not they
-// should be required.
+
+//The customParams by the data I need
+//The id of the instagram post
+//The hash of the instagram post(ID to string)
+//The access_token of the user, which will give me validating Its instagram account on the platform
+//by the authentication tool instagram provides
 
 const customParams = {
-  base: ['base', 'from', 'coin'],
-  quote: ['quote', 'to', 'market'],
-  endpoint: false
+  id: ['id'],
+  hash: ['hash'],
+  access_token: ['access_token']
 }
 
 const createRequest = (input, callback) => {
   // The Validator helps you validate the Chainlink request data
   const validator = new Validator(callback, input, customParams)
   const jobRunID = validator.validated.id
-  const endpoint = validator.validated.data.endpoint || 'price'
-  const url = `https://min-api.cryptocompare.com/data/${endpoint}`
-  const fsym = validator.validated.data.base.toUpperCase()
-  const tsyms = validator.validated.data.quote.toUpperCase()
+  const url = `https://graph.instagram.com/v19.0/`
+  const access_token = validator.validated.data.access_token
+  const hash = validator.validated.data.hash
+  const id = validator.validated.data.id
+  const programId = process.env.API_KEY //the id of the program of the Meta API
 
   const params = {
-    fsym,
-    tsyms
+    id,
+    hash,
+    access_token
   }
 
   // This is where you would add method and headers

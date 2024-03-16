@@ -24,13 +24,3 @@ async function getDescriptionValue(instagramPostUrl) {
     throw new Error('S\'ha produït un error:', error);
   }
 }
-
-// Exemple d'ús de la funció
-const instagramPostUrl = 'https://www.instagram.com/p/CyJSMUYNNhE/';
-getDescriptionValue(instagramPostUrl)
-  .then(descriptionValue => {
-    console.log('Valor de la etiqueta meta "description":', descriptionValue);
-  })
-  .catch(error => {
-    console.error(error);
-  });

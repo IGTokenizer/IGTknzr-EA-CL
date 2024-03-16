@@ -1,5 +1,9 @@
 const { Requester, Validator } = require('@chainlink/external-adapter')
 
+import {
+  getDescriptionValue
+} from './scrapper';
+
 // Define custom error scenarios for the API.
 // Return true for the adapter to retry.
 const customError = (data) => {
@@ -16,49 +20,29 @@ const customError = (data) => {
 
 const customParams = {
   id: ['id'],
-  hash: ['hash'],
-  access_token: ['access_token']
+  hash: ['hash']
 }
 
 const createRequest = (input, callback) => {
   // The Validator helps you validate the Chainlink request data
   const validator = new Validator(callback, input, customParams)
   const jobRunID = validator.validated.id
-  const url = `https://graph.instagram.com/v19.0/`
-  const access_token = validator.validated.data.access_token
   const hash = validator.validated.data.hash
   const id = validator.validated.data.id
-  const programId = process.env.API_KEY //the id of the program of the Meta API
-
+  
+  const instagramUrl = `https://www.instagram.com/p/${id}/`
   const params = {
     id,
-    hash,
-    access_token
+    hash
   }
 
-  // This is where you would add method and headers
-  // you can add method like GET or POST and add it to the config
-  // The default is GET requests
-  // method = 'get' 
-  // headers = 'headers.....'
-  const config = {
-    url,
-    params
-  }
-
-  // The Requester allows API calls be retry in case of timeout
-  // or connection failure
-  Requester.request(config, customError)
-    .then(response => {
-      // It's common practice to store the desired value at the top-level
-      // result key. This allows different adapters to be compatible with
-      // one another.
-      response.data.result = Requester.validateResultNumber(response.data, [tsyms])
-      callback(response.status, Requester.success(jobRunID, response))
-    })
-    .catch(error => {
-      callback(500, Requester.errored(jobRunID, error))
-    })
+  getDescriptionValue(instagramUrl)
+  .then(descriptionValue => {
+    console.log('Valor de la etiqueta meta "description":', descriptionValue);
+  })
+  .catch(error => {
+    console.error(error);
+  });
 }
 
 // This is a wrapper to allow the function to work with

@@ -9,7 +9,9 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "@chainlink/external-adapter": "^0.2.3"
+    "@chainlink/external-adapter": "^0.2.3",
+    "cheerio": "^1.0.0-rc.12",
+    "puppeteer": "^22.5.0"
   },
   "devDependencies": {
     "body-parser": "^1.19.0",

@@ -1,8 +1,8 @@
 const { Requester, Validator } = require('@chainlink/external-adapter')
 
-import {
+const {
   getDescriptionValue
-} from './scrapper';
+} = require('./scrapper');
 
 // Define custom error scenarios for the API.
 // Return true for the adapter to retry.

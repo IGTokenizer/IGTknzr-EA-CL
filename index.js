@@ -39,6 +39,7 @@ const createRequest = (input, callback) => {
   getDescriptionValue(instagramUrl)
   .then(descriptionValue => {
     console.log('Valor de la etiqueta meta "description":', descriptionValue);
+    callback(200, Requester.success(jobRunID, descriptionValue))
   })
   .catch(error => {
     console.error(error);

@@ -1,9 +1,5 @@
 const { Requester, Validator } = require('@chainlink/external-adapter')
-
-const {
-  getDescriptionValue
-} = require('./scrapper');
-
+const { getDescriptionValue } = require('./scrapper')
 // Define custom error scenarios for the API.
 // Return true for the adapter to retry.
 const customError = (data) => {
@@ -25,21 +21,23 @@ const customParams = {
 
 const createRequest = (input, callback) => {
   // The Validator helps you validate the Chainlink request data
-  const validator = new Validator(callback, input, customParams)
+  const validator = new Validator(input, customParams)
   const jobRunID = validator.validated.id
   const hash = validator.validated.data.hash
   const id = validator.validated.data.id
   
   const instagramUrl = `https://www.instagram.com/p/${id}/`
+  console.log('instagramUrl:', instagramUrl)
+
   const params = {
     id,
     hash
   }
-
+  console.log('requestUrl:', instagramUrl)
   getDescriptionValue(instagramUrl)
   .then(descriptionValue => {
     console.log('Valor de la etiqueta meta "description":', descriptionValue);
-    callback(200, Requester.success(jobRunID, descriptionValue))
+    callback(200, {jobRunID, descriptionValue})
   })
   .catch(error => {
     console.error(error);

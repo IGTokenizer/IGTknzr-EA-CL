@@ -24,3 +24,7 @@ async function getDescriptionValue(instagramPostUrl) {
     throw new Error('S\'ha produït un error:', error);
   }
 }
+
+module.exports = {
+  getDescriptionValue
+}

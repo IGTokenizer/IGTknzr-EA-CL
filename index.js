@@ -28,16 +28,16 @@ const createRequest = (input, callback) => {
   
   const instagramUrl = `https://www.instagram.com/p/${id}/`
   console.log('instagramUrl:', instagramUrl)
-
-  const params = {
-    id,
-    hash
-  }
   console.log('requestUrl:', instagramUrl)
   getDescriptionValue(instagramUrl)
   .then(descriptionValue => {
     console.log('Valor de la etiqueta meta "description":', descriptionValue);
-    callback(200, {jobRunID, descriptionValue})
+    var result = false;
+    if(descriptionValue.includes(hash)){
+      result = true;
+    }
+    callback(200,
+      { jobRunID: jobRunID, data: { result: result } })
   })
   .catch(error => {
     console.error(error);

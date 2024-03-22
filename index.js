@@ -15,8 +15,8 @@ const customError = (data) => {
 //by the authentication tool instagram provides
 
 const customParams = {
-  id: ['id'],
-  hash: ['hash']
+  id: ['postId'],
+  hash: ['hashToVerify']
 }
 
 const createRequest = (input, callback) => {

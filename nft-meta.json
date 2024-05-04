@@ -1,0 +1,12 @@
+{
+    "description": "First IGTokenizer NFT Created.", 
+    "external_url": "https://faysalbadaoui.com", 
+    "image": "ipfs://QmfUMnp87PJtWUMd8uPr238edLjVWTnBVg45SBSqkEeYYA", 
+    "name": "First IGToknizer NFT",
+    "attributes": [
+        {
+          "trait_type": "Verified", 
+          "value": "true"
+        }
+      ]
+  }

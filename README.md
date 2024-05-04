@@ -83,7 +83,7 @@ docker build . -t external-adapter
 Then run it with:
 
 ```bash
-docker run -p 8080:8080 -it external-adapter:latest
+docker run -p 8081:8081 -it external-adapter:latest
 ```
 
 ## Serverless hosts
